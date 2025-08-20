@@ -18,7 +18,9 @@ export default async function Dashboard(): Promise<any> {
                 <div className="text-sm text-gray-600">{d.tags?.join(', ')} • {d.difficulty}</div>
               </div>
               <div>
-                <Link href={`/drill/${d._id}`}><a className="px-3 py-1 bg-blue-600 text-white rounded">Open</a></Link>
+                <Link
+                  href={`/drill/${d._id}`}
+                  className="px-3 py-1 bg-blue-600 text-white rounded">Open</Link>
               </div>
             </div>
           </li>

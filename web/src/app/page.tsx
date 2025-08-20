@@ -8,7 +8,7 @@ export default function Home() {
         <p className="mb-6">Practice short, focused drills and track your attempts.</p>
         <div className="flex gap-4 justify-center">
           <a className="px-4 py-2 bg-blue-600 text-white rounded" href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/auth/google`}>Sign in with Google</a>
-          <Link href="/dashboard"><a className="px-4 py-2 border rounded">Explore drills</a></Link>
+          <Link href="/dashboard" className="px-4 py-2 border rounded">Explore drills</Link>
         </div>
       </div>
     </div>
