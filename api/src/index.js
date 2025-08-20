@@ -12,7 +12,7 @@ const attemptsRouter = require('./routes/attempts');
 const meRouter = require('./routes/me');
 const authRouter = require('./routes/auth');
 const passport = require('./auth/passport');
-const cookieSession = require('cookie-session');
+const session = require('express-session');
 
 async function main() {
   await mongoose.connect(MONGO_URI, { autoIndex: true });
@@ -23,7 +23,15 @@ async function main() {
   app.use(cookieParser());
   app.use(morgan('dev'));
   app.use(cors({ origin: process.env.WEB_BASE_URL || 'http://localhost:3000', credentials: true }));
-  app.use(cookieSession({ name: 'session', keys: [COOKIE_SECRET || 'dev-secret'], maxAge: 24 * 60 * 60 * 1000 }));
+  app.use(session({
+    secret: COOKIE_SECRET || 'dev-secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+      maxAge: 24 * 60 * 60 * 1000,
+      secure: process.env.COOKIE_SECURE === 'true'
+    }
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
 
