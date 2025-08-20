@@ -1,0 +1,10 @@
+{
+  "info": { "name": "Interview Drills API", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "item": [
+    { "name": "Health", "request": { "method": "GET", "url": "{{baseUrl}}/api/health" } },
+    { "name": "List drills", "request": { "method": "GET", "url": "{{baseUrl}}/api/drills" } },
+    { "name": "Get drill", "request": { "method": "GET", "url": "{{baseUrl}}/api/drills/:id" } },
+    { "name": "Start Google OAuth", "request": { "method": "GET", "url": "{{baseUrl}}/auth/google" } },
+    { "name": "Submit attempt", "request": { "method": "POST", "url": "{{baseUrl}}/api/attempts", "body": { "mode": "raw", "raw": "{ \"drillId\": \"<id>\", \"answers\": [\"a\",\"b\"] }" } } }
+  ]
+}

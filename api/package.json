@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Interview drills API",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --enable-source-maps src/index.js",
+    "start": "node src/index.js",
+    "seed": "node src/seed.js",
+    "build": "echo \"no build step\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.1.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^6.7.0",
+    "helmet": "^6.0.1",
+    "mongoose": "^7.5.0",
+    "morgan": "^1.10.0",
+    "node-cache": "^5.1.2",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "zod": "^3.22.2"
+  }
+}
