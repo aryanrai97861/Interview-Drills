@@ -1,11 +1,22 @@
+"use client";
+
 import Link from 'next/link';
 import { apiFetch } from '../../lib/api';
+import { useState, useEffect } from 'react';
 
-// @ts-ignore
-export default async function Dashboard(): Promise<any> {
-  // @ts-ignore
-  const res = await apiFetch('/api/drills').catch(() => ({ data: [] }));
-  const drills: any[] = res.data || [];
+export default function Dashboard() {
+  const [drills, setDrills] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    apiFetch('/api/drills')
+      .then(res => setDrills(res.data || []))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className="p-8">Loading...</div>;
+
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-4">Drills</h1>
