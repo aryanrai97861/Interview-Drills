@@ -1,10 +1,18 @@
 {
-  "info": { "name": "Interview Drills API", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "info": {
+    "name": "Interview Drills API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
   "item": [
-    { "name": "Health", "request": { "method": "GET", "url": "{{baseUrl}}/api/health" } },
-    { "name": "List drills", "request": { "method": "GET", "url": "{{baseUrl}}/api/drills" } },
-    { "name": "Get drill", "request": { "method": "GET", "url": "{{baseUrl}}/api/drills/:id" } },
-    { "name": "Start Google OAuth", "request": { "method": "GET", "url": "{{baseUrl}}/auth/google" } },
-    { "name": "Submit attempt", "request": { "method": "POST", "url": "{{baseUrl}}/api/attempts", "body": { "mode": "raw", "raw": "{ \"drillId\": \"<id>\", \"answers\": [\"a\",\"b\"] }" } } }
+    { "name": "Health Check", "request": { "method": "GET", "url": "{{base_url}}/api/health" } },
+    { "name": "Get All Drills", "request": { "method": "GET", "url": "{{base_url}}/api/drills" } },
+    { "name": "Get Drill By ID", "request": { "method": "GET", "url": "{{base_url}}/api/drills/:id" } },
+    { "name": "Get Me (Auth Required)", "request": { "method": "GET", "header": [{ "key": "Cookie", "value": "{{session_cookie}}", "type": "text" }], "url": "{{base_url}}/api/me" } },
+    { "name": "Submit Attempt (Auth Required)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }, { "key": "Cookie", "value": "{{session_cookie}}", "type": "text" }], "body": { "mode": "raw", "raw": "{ \"drillId\": \"drill_id_here\", \"answers\": [\"answer1\", \"answer2\", \"answer3\", \"answer4\", \"answer5\"] }" }, "url": "{{base_url}}/api/attempts" } },
+    { "name": "Get Last 5 Attempts (Auth Required)", "request": { "method": "GET", "header": [{ "key": "Cookie", "value": "{{session_cookie}}", "type": "text" }], "url": "{{base_url}}/api/attempts?limit=5" } }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:4000" },
+    { "key": "session_cookie", "value": "" }
   ]
 }
