@@ -20,20 +20,43 @@ async function main() {
 
   app.use(helmet());
   app.use(express.json());
-  app.use(cookieParser());
+  // parse cookies and verify signed cookies using the same secret as sessions
+  app.use(cookieParser(COOKIE_SECRET || 'dev-secret'));
   app.use(morgan('dev'));
-  app.use(cors({ origin: process.env.WEB_BASE_URL || 'http://localhost:3000', credentials: true }));
+  app.use(cors({ 
+    origin: process.env.WEB_BASE_URL || 'http://localhost:3000', 
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+  }));
+  
+  // Session middleware
   app.use(session({
     secret: COOKIE_SECRET || 'dev-secret',
     resave: false,
     saveUninitialized: false,
     cookie: { 
       maxAge: 24 * 60 * 60 * 1000,
-      secure: process.env.COOKIE_SECURE === 'true'
-    }
+      secure: process.env.COOKIE_SECURE === 'true',
+      httpOnly: true,
+      sameSite: 'lax'
+    },
+    name: 'connect.sid'  // explicitly set cookie name
   }));
+
+  // Initialize Passport and restore authentication state from session
   app.use(passport.initialize());
   app.use(passport.session());
+
+  // Debug middleware to log session and user
+  app.use((req, res, next) => {
+    console.log('Session Debug:', {
+      sessionID: req.sessionID,
+      hasSession: !!req.session,
+      user: req.user,
+      cookies: req.cookies
+    });
+    next();
+  });
 
   const limiter = rateLimit({ windowMs: Number(RATE_LIMIT_WINDOW_MS) || 60000, max: Number(RATE_LIMIT_MAX) || 100 });
   app.use(limiter);

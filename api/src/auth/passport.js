@@ -3,12 +3,23 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/user');
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALLBACK_URL } = require('../config');
 
-passport.serializeUser((user, done) => done(null, user._id));
+passport.serializeUser((user, done) => {
+  console.log('Serializing user:', user);
+  done(null, user._id);
+});
+
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id).lean();
+    console.log('Deserializing user ID:', id);
+    const user = await User.findById(id);
+    if (!user) {
+      console.log('User not found');
+      return done(null, false);
+    }
+    console.log('Found user:', user);
     done(null, user);
   } catch (err) {
+    console.error('Deserialize error:', err);
     done(err);
   }
 });

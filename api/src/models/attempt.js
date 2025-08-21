@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const attemptSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  drillId: { type: mongoose.Schema.Types.ObjectId, ref: 'Drill' },
-  answers: [String],
-  score: Number,
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  drillId: { type: mongoose.Schema.Types.ObjectId, ref: 'Drill', required: true },
+  answers: [{ type: String }],  // Changed to simpler array format
+  score: { type: Number },
   createdAt: { type: Date, default: Date.now }
 });
 

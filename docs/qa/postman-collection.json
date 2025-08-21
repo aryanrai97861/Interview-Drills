@@ -4,11 +4,55 @@
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
-    { "name": "Health Check", "request": { "method": "GET", "url": "{{base_url}}/api/health" } },
-    { "name": "Get All Drills", "request": { "method": "GET", "url": "{{base_url}}/api/drills" } },
-    { "name": "Get Drill By ID", "request": { "method": "GET", "url": "{{base_url}}/api/drills/:id" } },
-    { "name": "Get Me (Auth Required)", "request": { "method": "GET", "header": [{ "key": "Cookie", "value": "{{session_cookie}}", "type": "text" }], "url": "{{base_url}}/api/me" } },
-    { "name": "Submit Attempt (Auth Required)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }, { "key": "Cookie", "value": "{{session_cookie}}", "type": "text" }], "body": { "mode": "raw", "raw": "{ \"drillId\": \"drill_id_here\", \"answers\": [\"answer1\", \"answer2\", \"answer3\", \"answer4\", \"answer5\"] }" }, "url": "{{base_url}}/api/attempts" } },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/health"
+      }
+    },
+    {
+      "name": "Get All Drills",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/drills"
+      }
+    },
+    {
+      "name": "Get Drill By ID",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/drills/:id"
+      }
+    },
+    {
+      "name": "Get Me (Auth Required)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "connect.sid={{session_cookie}}",
+            "type": "text"
+          }
+        ],
+        "url": "{{base_url}}/api/me"
+      }
+    },
+    {
+      "name": "Submit Attempt (Auth Required)",
+      "request": {
+      "method": "POST",
+      "header": [
+        { "key": "Content-Type", "value": "application/json", "type": "text" },
+        { "key": "Cookie", "value": "{{session_cookie}}", "type": "text" }
+      ],
+      "body": {
+        "mode": "raw",
+        "raw": "{\n  \"drillId\": \"68a5aeef52b02f92b8053f6a\",\n  \"answers\": [\"answer1\", \"answer2\", \"answer3\", \"answer4\", \"answer5\"]\n}"
+      },
+      "url": "{{base_url}}/api/attempts"
+    } },
     { "name": "Get Last 5 Attempts (Auth Required)", "request": { "method": "GET", "header": [{ "key": "Cookie", "value": "{{session_cookie}}", "type": "text" }], "url": "{{base_url}}/api/attempts?limit=5" } }
   ],
   "variable": [
