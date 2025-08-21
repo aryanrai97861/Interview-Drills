@@ -49,7 +49,7 @@
       ],
       "body": {
         "mode": "raw",
-        "raw": "{\n  \"drillId\": \"68a5aeef52b02f92b8053f6a\",\n  \"answers\": [\"answer1\", \"answer2\", \"answer3\", \"answer4\", \"answer5\"]\n}"
+        "raw": "{\n  \"drillId\": \"\",\n  \"answers\": [\"answer1\", \"answer2\", \"answer3\", \"answer4\", \"answer5\"]\n}"
       },
       "url": "{{base_url}}/api/attempts"
     } },
