@@ -10,6 +10,13 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
   res.redirect((process.env.WEB_BASE_URL || 'http://localhost:3000') + '/dashboard');
 });
 
+router.get('/me', (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ error: { code: 401, message: 'Not authenticated' } });
+  }
+  res.json({ data: req.user });
+});
+
 router.get('/logout', (req, res) => {
   req.logout?.();
   req.session = null;
